@@ -3,21 +3,31 @@
   import { onMount, onDestroy } from 'svelte';
   import { Tracker } from 'meteor/tracker';
 
+  // Import your auth components
   import LoginForm from './components/auth/LoginForm.svelte';
   import RegisterForm from './components/auth/RegisterForm.svelte';
 
-  // Define a type for User (can be expanded later)
-  // Meteor.User includes username?: string; emails?: { address: string; verified: boolean; }[]; etc.
+  // Import your new chat components
+  import MessageList from './components/chat/MessageList.svelte';
+  import MessageInput from './components/chat/MessageInput.svelte';
+
+  // DaisyUI utility components (if you plan to use them for modals, toasts globally from App.svelte)
+  // For now, we don't have specific uses for these directly in App.svelte's template,
+  // but they might be used by other components or future features.
+  // If not used directly by App.svelte template or its direct children, they might not be strictly necessary here.
+  // However, DaisyUI components are mostly class-based.
+  // import { Modal, Toast, Drawer } from 'daisyui'; // DaisyUI doesn't export Svelte components like this
+
   let currentUser: Meteor.User | null = null;
   let currentUserId: string | null = null;
   let showLogin: boolean = true;
 
-  let userComputation: Tracker.Computation; // Explicitly type Tracker.Computation
+  let userComputation: Tracker.Computation;
 
   onMount(() => {
     userComputation = Tracker.autorun(() => {
-      currentUser = Meteor.user(); // Meteor.user() can return Meteor.User or null
-      currentUserId = Meteor.userId(); // Meteor.userId() can return string or null
+      currentUser = Meteor.user();
+      currentUserId = Meteor.userId();
     });
   });
 
@@ -63,16 +73,16 @@
     </div>
   </div>
 
-  <main class="flex-grow flex flex-col items-center justify-center p-4 md:p-10">
+  <main class="flex-grow flex flex-col items-center justify-center p-4 md:p-6 lg:p-8">
     {#if currentUserId}
-      <div class="card w-full max-w-2xl bg-base-100 shadow-xl p-6 text-center">
-        <h2 class="text-2xl font-bold text-primary mb-4">Chat Room</h2>
-        <p>The awesome chat interface will go here soon!</p>
-        <div class="divider">User Info</div>
-        <p class="mt-4 text-sm">Your User ID: {currentUserId}</p>
-        {#if currentUser?.emails}
-          <p class="text-sm">Your Email: {currentUser.emails[0].address}</p>
-        {/if}
+      <div class="card w-full max-w-3xl lg:max-w-4xl bg-base-100 shadow-xl flex flex-col" style="height: calc(100vh - 12rem); max-height: 700px;">
+        <div class="p-4 border-b border-base-300">
+            <h2 class="text-xl font-semibold text-center text-primary">Global Chat Room</h2>
+            </div>
+
+        <MessageList />
+
+        <MessageInput />
       </div>
     {:else}
       <div class="w-full max-w-md">
@@ -102,6 +112,8 @@
 
 <style lang="postcss">
   main {
-    /* min-height: calc(100vh - (navbar_height + footer_height)); /* Adjust if needed */
+    /* Ensures main content area uses available height if needed */
   }
+  /* You might need to adjust the height of the chat card based on navbar/footer heights */
+  /* The style attribute on the chat card div is one way to manage its height. */
 </style>
