@@ -1,45 +1,45 @@
+// tsconfig.json
 {
   "compilerOptions": {
-    "target": "esnext", // Specify a modern JS target
-    "module": "esNext", // Use ESNext modules
-    "moduleResolution": "bundler", // Or "node16"/"nodenext". 'bundler' is good for modern tools.
+    "target": "esnext",
+    "module": "esNext",
+    "moduleResolution": "bundler",
     "baseUrl": ".",
     "paths": {
       "/*": ["*"],
       "meteor/*": [
         "node_modules/@types/meteor/*",
-        ".meteor/local/types/packages.d.ts" // Ensure this path is correct for your setup
+        ".meteor/local/types/packages.d.ts"
       ]
     },
-    "resolveJsonModule": true, // Allows importing JSON files
+    "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true, // Improves compatibility between CommonJS and ES modules
-    "preserveSymlinks": true,
-    "verbatimModuleSyntax": true, // Replaces preserveValueImports
-    "useDefineForClassFields": true, // Often required for modern JS/TS class fields
-    "skipLibCheck": true, // Speeds up compilation by not type-checking declaration files in node_modules
+    "esModuleInterop": true,
+    "preserveSymlinks": true, // Important for Meteor
+    "verbatimModuleSyntax": true, // The correct modern flag
+    "useDefineForClassFields": true,
+    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": false // You can set this to true for stricter type checking later
-    // Add Svelte specific options if needed, but usually handled by svelte-preprocess
+    "strict": false // You can change this to true later for stricter checking
   },
   "include": [
-    "imports/**/*.js",
     "imports/**/*.ts",
+    "imports/**/*.js",
     "imports/**/*.svelte",
-    "client/**/*.js",
     "client/**/*.ts",
+    "client/**/*.js",
     "client/**/*.svelte",
-    "server/**/*.js",
     "server/**/*.ts",
-    "*.js",        // For root JS files if any
-    "*.ts",        // For root TS files if any
-    "*.cjs",       // To include your .config.cjs files
+    "server/**/*.js",
+    "*.ts",
+    "*.js",
+    "*.cjs",
     "*.mjs"
   ],
   "exclude": [
-    "node_modules", // Explicitly exclude node_modules
+    "node_modules",
     ".meteor/**",
-    "packages/**",  // If you have a local Meteor packages folder
-    "public/**"     // Typically not part of TS compilation
+    "packages/**",
+    "public/**"
   ]
 }
