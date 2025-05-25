@@ -6,6 +6,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage'; // Import RegisterPage
+import ChatPage from './pages/ChatPage'; // <--- Import ChatPage
 import { Typography, Box, Button } from '@mui/material'; // For the chat page placeholder
 
 const theme = createTheme({
@@ -37,39 +38,34 @@ const ChatInterface: React.FC = () => {
 
 const App: React.FC = () => {
   const [showRegister, setShowRegister] = useState(false);
-  
-  // Use useTracker to reactively get the current user
   const user = useTracker(() => Meteor.user());
-  const isLoadingUser = useTracker(() => Meteor.loggingIn() || !Meteor.userId() && !Meteor.user());
-
+  // const isLoadingUser = useTracker(() => Meteor.loggingIn() || (!Meteor.userId() && !Meteor.user()) ); // More robust loading
 
   const toggleView = () => {
     setShowRegister(!showRegister);
   };
 
-  // If user data is still loading, you might want to show a loading spinner
-  // For simplicity, we'll just rely on the user object being null/defined.
-  // A more robust loading state would check Meteor.loggingIn()
+  // You might want a more sophisticated loading indicator here
+  // if (isLoadingUser && !user) { 
+  //   return <Typography>Loading...</Typography>; // Or a spinner
+  // }
 
   if (user) {
-    // If user is logged in, show the main chat interface
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <ChatInterface /> {/* Replace with your actual chat page later */}
+        <ChatPage /> {/* <--- Use ChatPage here */}
       </ThemeProvider>
     );
   }
 
-  // If no user, show Login or Register page
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       {showRegister ? (
         <RegisterPage onToggleView={toggleView} />
       ) : (
-        <LoginPage onToggleView={toggleView} /> 
-        // We need to add onToggleView to LoginPage props too
+        <LoginPage onToggleView={toggleView} />
       )}
     </ThemeProvider>
   );
