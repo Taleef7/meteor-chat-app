@@ -1,45 +1,31 @@
-// tsconfig.json
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es2018", // Or newer, ES2020 is also common
     "module": "esNext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
+    "lib": ["esnext", "dom"],
+    "jsx": "react-jsx", // Important for React 17+ JSX transform
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "/*": ["*"],
-      "meteor/*": [
-        "node_modules/@types/meteor/*",
-        ".meteor/local/types/packages.d.ts"
-      ]
+      "/*": ["*"]
     },
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "preserveSymlinks": true, // Important for Meteor
-    "verbatimModuleSyntax": true, // The correct modern flag
-    "useDefineForClassFields": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true, // Can be useful
     "forceConsistentCasingInFileNames": true,
-    "strict": false // You can change this to true later for stricter checking
+    "strict": true // Recommended for new projects
   },
   "include": [
-    "imports/**/*.ts",
-    "imports/**/*.js",
-    "imports/**/*.svelte",
-    "client/**/*.ts",
-    "client/**/*.js",
-    "client/**/*.svelte",
-    "server/**/*.ts",
-    "server/**/*.js",
-    "*.ts",
-    "*.js",
-    "*.cjs",
-    "*.mjs"
+    "**/*.ts",
+    "**/*.tsx",
+    ".meteor/local/build/programs/server/assets/webpack/src/**/*.ts", // For any Webpack specific things if you add them
+    ".meteor/local/build/programs/server/assets/webpack/src/**/*.tsx"
   ],
   "exclude": [
     "node_modules",
-    ".meteor/**",
-    "packages/**",
-    "public/**"
+    ".meteor/local"
   ]
 }
