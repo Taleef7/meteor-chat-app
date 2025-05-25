@@ -1,6 +1,6 @@
 // imports/ui/components/MessageItem.tsx
 import React from 'react';
-import { Box, Typography, Paper, Grid } from '@mui/material'; // Removed Avatar for now unless you add it
+import { Box, Typography, Paper, Grid } from '@mui/material';
 import { blue, grey } from '@mui/material/colors';
 
 export interface Message {
@@ -22,9 +22,9 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, isCurrentUser }) => 
   const textColor = isCurrentUser ? 'white' : 'black';
 
   return (
-    // The outer Grid acts as a "row" to justify content
     <Grid container justifyContent={align} sx={{ mb: 1 }}>
-      <Grid xs={8} sm={7} md={6}> 
+      {/* Corrected Grid sizing prop for MUI v6/v7 */}
+      <Grid size={{ xs: 4, sm: 2, md: 1.25 }}> 
         <Box display="flex" flexDirection="column" alignItems={align}>
           <Typography variant="caption" color="textSecondary" sx={{ mx: 1 }}>
             {message.username} - {new Date(message.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
@@ -36,8 +36,8 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, isCurrentUser }) => 
               bgcolor: bubbleColor,
               color: textColor,
               borderRadius: isCurrentUser 
-                ? '20px 20px 5px 20px' 
-                : '20px 20px 20px 5px',
+                ? '20px 25px 3px 20px' 
+                : '20px 20px 20px 3px',
             }}
           >
             <Typography variant="body1" style={{ wordBreak: 'break-word' }}>{message.text}</Typography>
