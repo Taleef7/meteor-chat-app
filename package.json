@@ -34,5 +34,8 @@
       }
     },
     "testModule": "tests/main.js"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
