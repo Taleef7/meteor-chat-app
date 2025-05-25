@@ -10,16 +10,16 @@
   "dependencies": {
     "@babel/runtime": "^7.20.6",
     "meteor-node-stubs": "^1.2.5",
-    "svelte": "^3.54.0"
+    "svelte": "^3.54.0",
+    "svelte-preprocess": "^5.0.0",
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@types/meteor": "^2.9.8",
     "autoprefixer": "^10.4.21",
     "daisyui": "^4.12.24",
     "postcss": "^8.5.3",
-    "svelte-preprocess": "^5.0.0",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5.8.3"
+    "tailwindcss": "^3.4.17"
   },
   "meteor": {
     "mainModule": {
