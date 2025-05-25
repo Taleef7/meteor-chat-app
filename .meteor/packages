@@ -16,8 +16,7 @@ typescript@5.6.3              # Enable TypeScript syntax in .ts and .tsx modules
 shell-server@0.6.1            # Server-side component of the `meteor shell` command
 
 
-static-html@1.4.0             # Define static page content in .html files
-zodern:melte            # Meteor package to allow us to create files with the .svelte extension
+static-html             # Define static page content in .html files
 hot-module-replacement@0.5.4  # Update client in development without reloading the page
-zodern:types            # Enable types from meteor/atmosphere packages
-accounts-password
+accounts-password@3.1.0
+react-meteor-data
